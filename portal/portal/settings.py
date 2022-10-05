@@ -39,13 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'news.apps.NewsConfig',
-    'django_filters',
-    'accounts',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.github',
 ]
 
 LOGIN_URL = '/accounts/login/'
@@ -150,3 +143,16 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_FORMS = {'signup': 'accounts.models.BasicSignupForm'}
 
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('MAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('MAIL_PASSWORD')
+EMAIL_USE_SSL = True
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@mail.ru'
+
+CELERY_BROKER_URL = 'redis://localhost:6378'
+CELERY_RESULT_BACKEND = 'redis://localhost:6378'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
